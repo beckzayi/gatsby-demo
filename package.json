@@ -12,7 +12,11 @@
         "clean": "gatsby clean"
     },
     "dependencies": {
+        "@mdx-js/mdx": "^1.5.7",
+        "@mdx-js/react": "^1.5.7",
         "gatsby": "^2.26.1",
+        "gatsby-plugin-mdx": "^1.0.79",
+        "gatsby-source-filesystem": "^2.1.52",
         "react": "^16.12.0",
         "react-dom": "^16.12.0"
     }
