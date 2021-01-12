@@ -1,0 +1,19 @@
+{
+    "name": "gatsby-demo",
+    "private": true,
+    "description": "A simplified bare-bones starter for Gatsby",
+    "version": "0.1.0",
+    "license": "BSD",
+    "scripts": {
+        "build": "gatsby build",
+        "develop": "gatsby develop",
+        "start": "npm run develop",
+        "serve": "gatsby serve",
+        "clean": "gatsby clean"
+    },
+    "dependencies": {
+        "gatsby": "^2.26.1",
+        "react": "^16.12.0",
+        "react-dom": "^16.12.0"
+    }
+}
