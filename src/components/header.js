@@ -1,5 +1,6 @@
 import React from 'react';
 import formatPage from '../util/formatPage';
+import Nav from './nav';
 
 export default () => {
     const data = require('../../data/api.json');
@@ -14,14 +15,8 @@ export default () => {
 
     return (
         <header>
-            <div>
-                {pages.map((arr, index) => (
-                    <ul key={index}>
-                    { arr.map(({slug, operationId}) => (
-                            <li key={operationId}><a href={`/pages/${slug}`}>{operationId}</a></li>
-                    )) }
-                    </ul>
-                ))}
+            <div style={{ fontFamily: 'monospace' }}>
+                <Nav pages={pages} />
             </div>
         </header>
     );
