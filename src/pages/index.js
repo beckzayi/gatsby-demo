@@ -1,5 +1,9 @@
 import React from 'react';
+import Header from '../components/header';
 
 export default () => (
-    <h1 style={{ color: 'purple' }}>Hello Gatsby</h1>
+    <div>
+        <Header />
+        <h1 style={{ color: 'purple' }}>Hello Gatsby</h1>
+    </div>
 )

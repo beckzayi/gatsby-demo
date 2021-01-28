@@ -1,38 +1,28 @@
 import React from 'react';
+import formatPage from '../util/formatPage';
 
 export default () => {
-    // const pageData = require('../../data/pages.json');
-    // const { paths } = pageData;
-
-    // const pages = Object.keys(paths).map(key => {
-    //     const page = paths[key];
-    //     page.slug = key;
-    //     return page;
-    // });
-
     const data = require('../../data/api.json');
     const { paths } = data;
-    console.log('paths', paths);
 
-    const pages = Object.keys(paths).map(path => {
-        let page = {};
-        if (paths[path].get) {
-            page.get = paths[path].get;
-        }
-        if (paths[path].post) {
-            page.post = paths[path].post;
-        }
+    const pages = Object.keys(paths).map(key => {
+        // `key` here is the api request url
+        const apiUrl = key;
+        const page = formatPage(paths[apiUrl]);
         return page;
-    })
+    });
 
     return (
         <header>
-            <ul>
-                {/* {pages.map(({slug, operationId}) => (
-                    <li key={slug}><a href={`/pages${slug}`}>{operationId}</a></li>
-                ))} */}
-                pages
-            </ul>
+            <div>
+                {pages.map((arr, index) => (
+                    <ul key={index}>
+                    { arr.map(({slug, operationId}) => (
+                            <li key={operationId}><a href={`/pages/${slug}`}>{operationId}</a></li>
+                    )) }
+                    </ul>
+                ))}
+            </div>
         </header>
     );
 };

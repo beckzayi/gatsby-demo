@@ -1,18 +1,25 @@
+const formatPage = require('./src/util/formatPage');
+
 exports.createPages = ({ actions: { createPage } }) => {
-    const pageData = require('./data/pages.json');
+    const pageData = require('./data/api.json');
 
     const { paths } = pageData;
 
+    const results = [];
+
     // convert JSON string to array
-    const pages = Object.keys(paths).map(key => {
-        const page = paths[key];
-        page.slug = key;
-        return page;
+    Object.keys(paths).forEach(key => {
+        // `key` here is the api request url
+        const apiUrl = key;
+        const arrayOfPages = formatPage(paths[apiUrl]);
+        arrayOfPages.forEach((item) => {
+            results.push(item);
+        });
     });
 
-    pages.forEach(page => {
+    results.forEach(page => {
         createPage({
-            path: `/pages${page.slug}`,
+            path: `/pages/${page.slug}`,
             component: require.resolve(`./src/templates/page-template.js`),
             context: { page }
         })
