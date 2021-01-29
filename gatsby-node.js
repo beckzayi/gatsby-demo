@@ -11,7 +11,7 @@ exports.createPages = ({ actions: { createPage } }) => {
     Object.keys(paths).forEach(key => {
         // `key` here is the api request url
         const apiUrl = key;
-        const arrayOfPages = formatPage(paths[apiUrl]);
+        const arrayOfPages = formatPage(paths[apiUrl], apiUrl);
         arrayOfPages.forEach((item) => {
             results.push(item);
         });

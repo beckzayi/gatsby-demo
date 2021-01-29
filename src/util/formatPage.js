@@ -1,4 +1,4 @@
-const formatPage = (pathObj) => {
+const formatPage = (pathObj, url) => {
     const { get: getObj, post: postObj } = pathObj;
 
     // Group get and post objects into the same request url, and push it to an array.
@@ -9,6 +9,7 @@ const formatPage = (pathObj) => {
         page = getObj;
         page.method = 'get';
         page.slug = `${page.operationId}/${page.method}`;
+        page.url = url;
         arrayOfPages.push(page);
     }
 
@@ -16,6 +17,7 @@ const formatPage = (pathObj) => {
         page = postObj;
         page.method = 'post';
         page.slug = `${page.operationId}/${page.method}`;
+        page.url = url;
         arrayOfPages.push(page);
     }
 
