@@ -4,10 +4,10 @@ import OperationId from '../components/main/operationId';
 import Url from '../components/main/url';
 import Summary from '../components/main/summary';
 import Description from '../components/main/description';
+import Responses from '../components/main/responses';
 
 export default ( { pageContext: { page } } ) => {
-    const { operationId, summary, description, method, url } = page;
-    console.log(page)
+    const { operationId, summary, description, method, url, responses } = page;
     return (
         <div style={{ display: 'flex' }}>
             <div style={{ width: '20%' }}>
@@ -22,6 +22,7 @@ export default ( { pageContext: { page } } ) => {
                     <Url method={method} url={url} />
                     <Summary content={summary} />
                     <Description content={description} />
+                    <Responses responses={responses} />
                 </section>
             </div>
         </div>
