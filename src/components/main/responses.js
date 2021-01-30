@@ -2,7 +2,6 @@ import React from 'react';
 import Response from './response';
 
 export default ({ responses }) => {
-    console.log(responses);
     return (
         <div>
             <h2>Responses</h2>
