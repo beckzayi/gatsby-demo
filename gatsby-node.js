@@ -21,7 +21,7 @@ exports.createPages = ({ actions: { createPage } }) => {
         createPage({
             path: `/pages/${page.slug}`,
             component: require.resolve(`./src/templates/page-template.js`),
-            context: { page }
+            context: { page, identifier: page.operationId }
         })
     });
 }

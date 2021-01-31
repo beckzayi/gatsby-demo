@@ -7,6 +7,18 @@ module.exports = {
                 path: `${__dirname}/src/pages/`
             }
         },
-        'gatsby-plugin-mdx'
+        {
+            resolve: 'gatsby-source-filesystem',
+            options: {
+                name: 'pages',
+                path: `${__dirname}/src/mds/`
+            }
+        },
+        {
+            resolve: 'gatsby-plugin-mdx',
+            options: {
+                extensions: ['.mdx', '.md']
+            }
+        }
     ]
 };
