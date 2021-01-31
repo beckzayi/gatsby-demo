@@ -10,7 +10,7 @@ import Responses from '../components/main/responses';
 
 export default ( { pageContext: { page }, data } ) => {
     const { operationId, summary, description, method, url, responses } = page;
-    const { allMdx: { edges } } = data;
+    const { allMdx: { edges, totalCount } } = data;
 
     return (
         <div style={{ display: 'flex' }}>
@@ -23,7 +23,7 @@ export default ( { pageContext: { page }, data } ) => {
             }}>
                 <section style={{ fontFamily: 'system-ui'}}>
                     <OperationId content={operationId} />
-                    {(edges.length > 0) && <MDXRenderer>{edges[0].node.body}</MDXRenderer>}
+                    {(totalCount > 0) && <MDXRenderer>{edges[0].node.body}</MDXRenderer>}
                     <Url method={method} url={url} />
                     <Summary content={summary} />
                     <Description content={description} />
@@ -37,6 +37,7 @@ export default ( { pageContext: { page }, data } ) => {
 export const mdxQuery = graphql`
     query($identifier: String!) {
         allMdx(filter: { frontmatter: { operationId: { eq: $identifier } } }) {
+            totalCount
             edges {
                 node {
                     frontmatter {
