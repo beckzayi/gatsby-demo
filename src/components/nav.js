@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'gatsby';
+import { PATH_PREFIX_DOCS } from '../util/helper';
 
 export default ({ pages }) => (
     pages.map((arr, index) => (
@@ -13,7 +14,7 @@ export default ({ pages }) => (
             {arr.map(({slug, operationId}) => (
                     <li key={operationId}>
                         <Link
-                            to={`/pages/${slug}`}
+                            to={`/${PATH_PREFIX_DOCS}/${slug}`}
                             style={{
                                 textDecoration: 'none',
                                 color: '#635E69'

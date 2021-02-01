@@ -19,7 +19,7 @@ exports.createPages = ({ actions: { createPage } }) => {
 
     results.forEach(page => {
         createPage({
-            path: `/pages/${page.slug}`,
+            path: `/docs/${page.slug}`,
             component: require.resolve(`./src/templates/page-template.js`),
             context: { page, identifier: page.operationId }
         })

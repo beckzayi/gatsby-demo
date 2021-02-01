@@ -9,3 +9,5 @@ export const getComponentObject = (componentName) => {
     const { components } = data;
     return components.schemas[componentName];
 };
+
+export const PATH_PREFIX_DOCS = 'docs';
