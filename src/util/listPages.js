@@ -1,4 +1,4 @@
-const formatPage = (pathObj, url) => {
+const listPages = (pathObj, url) => {
     // Group get and post objects into the same request url, and push it to an array.
     const arrayOfPages = [];
 
@@ -17,4 +17,4 @@ const formatPage = (pathObj, url) => {
     return arrayOfPages;
 }
 
-module.exports = formatPage;
+module.exports = listPages;

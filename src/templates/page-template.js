@@ -7,9 +7,19 @@ import Url from '../components/main/url';
 import Summary from '../components/main/summary';
 import Description from '../components/main/description';
 import Responses from '../components/main/responses';
+import Parameters from '../components/main/parameters';
 
 export default ( { pageContext: { page }, data } ) => {
-    const { operationId, summary, description, method, url, responses } = page;
+    const {
+        operationId,
+        summary,
+        description,
+        method,
+        url,
+        responses,
+        parameters
+    } = page;
+    
     const { allMdx: { edges, totalCount } } = data;
 
     return (
@@ -27,6 +37,7 @@ export default ( { pageContext: { page }, data } ) => {
                     <Url method={method} url={url} />
                     <Summary content={summary} />
                     <Description content={description} />
+                    {parameters && parameters.length > 0 && <Parameters parameters={parameters} />}
                     <Responses responses={responses} />
                 </section>
             </div>

@@ -1,4 +1,4 @@
-const formatPage = require('./src/util/formatPage');
+const formatPage = require('./src/util/listPages');
 
 exports.createPages = ({ actions: { createPage } }) => {
     const pageData = require('./data/api.json');

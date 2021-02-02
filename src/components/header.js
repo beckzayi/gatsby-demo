@@ -1,5 +1,5 @@
 import React from 'react';
-import formatPage from '../util/formatPage';
+import formatPage from '../util/listPages';
 import Nav from './nav';
 
 export default () => {
