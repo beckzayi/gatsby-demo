@@ -8,7 +8,7 @@ exports.createPages = ({ actions: { createPage } }) => {
     const results = [];
 
     // convert JSON string to array
-    Object.keys(paths).forEach(key => {
+    Object.keys(paths).forEach((key) => {
         // `key` here is the api request url
         const apiUrl = key;
         const arrayOfPages = formatPage(paths[apiUrl], apiUrl);
@@ -17,11 +17,11 @@ exports.createPages = ({ actions: { createPage } }) => {
         });
     });
 
-    results.forEach(page => {
+    results.forEach((page) => {
         createPage({
             path: `/docs/${page.slug}`,
             component: require.resolve(`./src/templates/page-template.js`),
-            context: { page, identifier: page.operationId }
-        })
+            context: { page, identifier: page.operationId },
+        });
     });
-}
+};

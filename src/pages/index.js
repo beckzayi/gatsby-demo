@@ -6,4 +6,4 @@ export default () => (
         <Header />
         <h1 style={{ color: 'purple' }}>Hello Gatsby</h1>
     </div>
-)
+);

@@ -6,7 +6,7 @@ export default () => {
     const data = require('../../data/api.json');
     const { paths } = data;
 
-    const pages = Object.keys(paths).map(key => {
+    const pages = Object.keys(paths).map((key) => {
         // `key` here is the api request url
         const apiUrl = key;
         const page = formatPage(paths[apiUrl]);

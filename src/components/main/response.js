@@ -5,7 +5,7 @@ export default ({ response, statusCode }) => {
     const { description, content } = response;
     let obj;
 
-    if (content && content["application/json"]) {
+    if (content && content['application/json']) {
         const { schema } = content['application/json'];
         if (schema) {
             const { $ref } = schema;
@@ -28,11 +28,7 @@ export default ({ response, statusCode }) => {
                 <strong>Description: </strong>
                 {description}
             </p>
-            <div>
-                {obj && 
-                    <pre>{JSON.stringify(obj, null, 2)}</pre>
-                }
-            </div>
+            <div>{obj && <pre>{JSON.stringify(obj, null, 2)}</pre>}</div>
             <hr />
         </div>
     );

@@ -4,7 +4,7 @@ const listPages = (pathObj, url) => {
 
     const actions = ['get', 'post', 'put', 'delete'];
 
-    Object.keys(pathObj).forEach(key => {
+    Object.keys(pathObj).forEach((key) => {
         if (actions.includes(key)) {
             const page = { ...pathObj[key] };
             page.method = key;
@@ -15,6 +15,6 @@ const listPages = (pathObj, url) => {
     });
 
     return arrayOfPages;
-}
+};
 
 module.exports = listPages;

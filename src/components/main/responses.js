@@ -6,7 +6,13 @@ export default ({ responses }) => {
         <div>
             <h2>Responses</h2>
             <div>
-                {Object.keys(responses).map(key => <Response key={key} response={responses[key]} statusCode={key} />)}
+                {Object.keys(responses).map((key) => (
+                    <Response
+                        key={key}
+                        response={responses[key]}
+                        statusCode={key}
+                    />
+                ))}
             </div>
         </div>
     );

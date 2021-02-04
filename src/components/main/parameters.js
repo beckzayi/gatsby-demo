@@ -18,11 +18,11 @@ export default ({ parameters }) => {
                     </tr>
                 </thead>
                 <tbody>
-                    {parameters.map(p => (
+                    {parameters.map((p) => (
                         <Parameter key={p.name} parameter={p} />
                     ))}
                 </tbody>
             </table>
         </div>
-    )
+    );
 };

@@ -7,7 +7,7 @@ export default ({ parameter }) => {
         example,
         name,
         required,
-        schema: { type }
+        schema: { type },
     } = parameter;
     if (allowEmptyValue) {
         return (
@@ -27,7 +27,6 @@ export default ({ parameter }) => {
                 <td>TODO:</td>
                 <td>dynamically display items</td>
             </tr>
-        )
+        );
     }
-    
-}
+};
