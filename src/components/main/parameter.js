@@ -9,16 +9,14 @@ export default ({ parameter }) => {
         required,
         schema: { type },
     } = parameter;
-    if (allowEmptyValue) {
+    if ((allowEmptyValue !== null) & (allowEmptyValue !== undefined)) {
         return (
             <tr>
                 <td>{name}</td>
-                <td>{description}</td>
-                <td>{allowEmptyValue.toString()}</td>
-                <td>{example}</td>
-                <td>{parameter.in}</td>
-                <td>{required.toString()}</td>
+                <td>{required ? 'required' : 'optional'}</td>
                 <td>{type}</td>
+                <td>{example}</td>
+                <td>{description}</td>
             </tr>
         );
     } else {
@@ -26,6 +24,11 @@ export default ({ parameter }) => {
             <tr>
                 <td>TODO:</td>
                 <td>dynamically display items</td>
+                <td>TODO</td>
+                <td>TODO</td>
+                <td>TODO</td>
+                <td>TODO</td>
+                <td>TODO</td>
             </tr>
         );
     }

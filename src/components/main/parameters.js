@@ -9,12 +9,10 @@ export default ({ parameters }) => {
                 <thead>
                     <tr>
                         <th>Name</th>
-                        <th>Description</th>
-                        <th>Allow Empty Value</th>
-                        <th>Example</th>
-                        <th>in</th>
                         <th>Required</th>
                         <th>Type</th>
+                        <th>Example</th>
+                        <th>Description</th>
                     </tr>
                 </thead>
                 <tbody>

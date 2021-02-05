@@ -8,6 +8,7 @@ import Summary from '../components/main/summary';
 import Description from '../components/main/description';
 import Responses from '../components/main/responses';
 import Parameters from '../components/main/parameters';
+import '../styles/app.css';
 
 export default ({ pageContext: { page }, data }) => {
     const {
