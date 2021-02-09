@@ -1,5 +1,6 @@
 import React from 'react';
 import { getComponentObject } from '../../util/helper';
+import getResponse from '../../util/getResponse';
 
 export default ({ response, statusCode }) => {
     const { description, content } = response;
@@ -19,6 +20,10 @@ export default ({ response, statusCode }) => {
         }
     }
 
+    /************** export fn **************/
+    const res = getResponse(response);
+    /************** End export fn **************/
+
     return (
         <div>
             <div>
@@ -28,8 +33,12 @@ export default ({ response, statusCode }) => {
                 <strong>Description: </strong>
                 {description}
             </p>
-            <div>{obj && <pre>{JSON.stringify(obj, null, 2)}</pre>}</div>
+            <div>{res && <pre>{JSON.stringify(res, null, 2)}</pre>}</div>
             <hr />
+            <div>
+                <div>old:</div>
+                <div>{obj && <pre>{JSON.stringify(obj, null, 2)}</pre>}</div>
+            </div>
         </div>
     );
 };
