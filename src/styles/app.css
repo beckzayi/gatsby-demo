@@ -1,3 +1,19 @@
+body {
+    color: #333c4e;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    color: #333;
+}
+
+h2 {
+    font-size: 1.6em;
+}
+
+h2 {
+    font-size: 1.3em;
+}
+
 .text-success {
     color: #48a383;
 }
@@ -5,3 +21,65 @@
 .text-danger {
     color: #e74c3c;
 }
+
+code {
+    display: inline;
+    padding: 1px 2px;
+    margin: 0 2px;
+    background-color: rgba(0, 0, 0, 0.04);
+    color: #e6555f;
+    border: 1px solid #f1f2f4;
+    border-radius: 3px;
+}
+
+/******** Table ********/
+table {
+    border-collapse: collapse;
+    border: 1px solid #eee;
+    font-size: 12px;
+    font-family: 'Open Sans', sans-serif;
+    width: 100%;
+}
+
+tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+td, th {
+    padding: 5px 8px;
+    text-align: left;
+}
+
+td:first-child {
+    padding-left: 15px;
+}
+
+.cell--number, .cell--integer {
+    color: #a52a2a;
+}
+
+.cell--string {
+    color: #008080;
+}
+
+.cell--boolean {
+    color: #ff69b4;
+}
+
+.cell--object {
+    color: #00f;
+}
+
+.cell--array {
+    color: #008000;
+}
+
+.cell--description, .cell--optional, .cell--example {
+    color: #999;
+}
+
+.cell--required {
+    font-weight: bold;
+}
+
+/******** END Table ********/

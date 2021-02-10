@@ -1,35 +1,26 @@
 import React from 'react';
+import ReactMarkdown from 'react-markdown';
 
 export default ({ parameter }) => {
     const {
-        allowEmptyValue,
         description,
         example,
         name,
         required,
         schema: { type },
     } = parameter;
-    if ((allowEmptyValue !== null) & (allowEmptyValue !== undefined)) {
-        return (
-            <tr>
-                <td>{name}</td>
-                <td>{required ? 'required' : 'optional'}</td>
-                <td>{type}</td>
-                <td>{example}</td>
-                <td>{description}</td>
-            </tr>
-        );
-    } else {
-        return (
-            <tr>
-                <td>TODO:</td>
-                <td>dynamically display items</td>
-                <td>TODO</td>
-                <td>TODO</td>
-                <td>TODO</td>
-                <td>TODO</td>
-                <td>TODO</td>
-            </tr>
-        );
-    }
+
+    return (
+        <tr>
+            <td className="cell--first">{name}</td>
+            <td className={`cell--${type}`}>{type}</td>
+            <td className="cell--description">
+                <ReactMarkdown>{description}</ReactMarkdown>
+            </td>
+            <td className={required ? 'cell--required' : 'cell--optional'}>
+                {required ? 'required' : 'optional'}
+            </td>
+            <td className="cell--example">{example}</td>
+        </tr>
+    );
 };
