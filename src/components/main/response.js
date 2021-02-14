@@ -1,6 +1,6 @@
 import React from 'react';
 import { getComponentObject } from '../../util/helper';
-import getResponse from '../../util/getResponse';
+import getExampleValue from '../../util/getExampleValue';
 
 export default ({ response, statusCode }) => {
     const { description, content } = response;
@@ -21,7 +21,7 @@ export default ({ response, statusCode }) => {
     }
 
     /************** export fn **************/
-    const res = getResponse(response);
+    const res = getExampleValue(response);
     /************** End export fn **************/
 
     return (

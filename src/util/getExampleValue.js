@@ -1,7 +1,7 @@
 import data from '../../data/api.json';
 
 /**
- * Return the example response
+ * Return the example value by response or requestBody object
  * @param {Object} response
  * @return {string|Object\Array}
  */

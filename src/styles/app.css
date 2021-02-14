@@ -2,7 +2,12 @@ body {
     color: #333c4e;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
     color: #333;
 }
 
@@ -45,7 +50,8 @@ tr:nth-child(even) {
     background-color: #f9f9f9;
 }
 
-td, th {
+td,
+th {
     padding: 5px 8px;
     text-align: left;
 }
@@ -54,7 +60,8 @@ td:first-child {
     padding-left: 15px;
 }
 
-.cell--number, .cell--integer {
+.cell--number,
+.cell--integer {
     color: #a52a2a;
 }
 
@@ -74,7 +81,9 @@ td:first-child {
     color: #008000;
 }
 
-.cell--description, .cell--optional, .cell--example {
+.cell--description,
+.cell--optional,
+.cell--example {
     color: #999;
 }
 

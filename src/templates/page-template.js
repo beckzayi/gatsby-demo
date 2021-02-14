@@ -8,6 +8,7 @@ import Summary from '../components/main/summary';
 import Description from '../components/main/description';
 import Responses from '../components/main/responses';
 import Parameters from '../components/main/parameters';
+import RequestBody from '../components/main/requestBody';
 import '../styles/app.css';
 
 export default ({ pageContext: { page }, data }) => {
@@ -19,6 +20,7 @@ export default ({ pageContext: { page }, data }) => {
         url,
         responses,
         parameters,
+        requestBody,
     } = page;
 
     const {
@@ -46,6 +48,7 @@ export default ({ pageContext: { page }, data }) => {
                     {parameters && parameters.length > 0 && (
                         <Parameters parameters={parameters} />
                     )}
+                    {requestBody && <RequestBody requestBody={requestBody} />}
                     <Responses responses={responses} />
                 </section>
             </div>
