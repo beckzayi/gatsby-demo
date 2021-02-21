@@ -11,6 +11,50 @@ export default (response) => {
     return exampleValue;
 };
 
+function getSchemaProperties(response) {
+    let schema = getParentSchema(response);
+    return getProperties(schema);
+}
+
+function getProperties(schema) {
+    if (schema === undefined) {
+        return;
+    }
+
+    // 1. If "example" exists
+    let $ref; // It is a string, pointing to a reference schema
+
+    if (Object.prototype.hasOwnProperty.call(schema, '$ref')) {
+        $ref = schema.$ref;
+        schema = getSchemaObjectByRef($ref);
+        if (Object.prototype.hasOwnProperty.call(schema, '$ref')) {
+            return getProperties(schema);
+        }
+    }
+
+    // 2. If "properties" exist
+    if (Object.prototype.hasOwnProperty.call(schema, 'properties')) {
+        const { properties, type, required } = schema;
+        const keys = Object.keys(properties);
+        keys.forEach((key) => {
+            if (Object.prototype.hasOwnProperty.call(properties[key], '$ref')) {
+                $ref = properties[key].$ref;
+                schema = getSchemaObjectByRef($ref);
+                const newProps = getProperties(schema);
+                properties[key] = newProps;
+            }
+        });
+
+        return {
+            properties,
+            type,
+            required,
+        };
+    }
+
+    return schema;
+}
+
 /**
  * Return the top parent schema
  * @param {Object} response
@@ -118,3 +162,5 @@ function getSchemaObjectByRef($ref) {
     const { components } = data;
     return components.schemas[componentName];
 }
+
+export { getSchemaProperties };
