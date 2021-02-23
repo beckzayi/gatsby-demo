@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import getExampleValue, {
     getSchemaProperties,
+    propMapping,
 } from '../../util/getExampleValue';
 
 export default ({ requestBody }) => {
@@ -130,26 +131,3 @@ export default ({ requestBody }) => {
         </div>
     );
 };
-
-/**
- * Put properties in an array
- * @param {object} properties
- * @return {Array}
- */
-function propMapping(properties) {
-    const result = Object.keys(properties).map((key) => {
-        const obj = {
-            name: key,
-            type: properties[key].type,
-        };
-        if (
-            Object.prototype.hasOwnProperty.call(properties[key], 'properties')
-        ) {
-            const tmp = propMapping(properties[key].properties);
-            return { ...obj, properties: tmp };
-        }
-        return obj;
-    });
-
-    return result;
-}

@@ -34,7 +34,7 @@ function getProperties(schema) {
 
     // 2. If "properties" exist
     if (Object.prototype.hasOwnProperty.call(schema, 'properties')) {
-        const { properties, type, required } = schema;
+        let { properties, type, required } = schema;
         const keys = Object.keys(properties);
         keys.forEach((key) => {
             if (Object.prototype.hasOwnProperty.call(properties[key], '$ref')) {
@@ -42,6 +42,24 @@ function getProperties(schema) {
                 schema = getSchemaObjectByRef($ref);
                 const newProps = getProperties(schema);
                 properties[key] = newProps;
+            } else if (
+                Object.prototype.hasOwnProperty.call(
+                    properties[key],
+                    'items'
+                ) &&
+                properties[key].type === 'array'
+            ) {
+                if (
+                    Object.prototype.hasOwnProperty.call(
+                        properties[key].items,
+                        '$ref'
+                    )
+                ) {
+                    $ref = properties[key].items.$ref;
+                    schema = getSchemaObjectByRef($ref);
+                    const newProps = getProperties(schema);
+                    properties[key] = newProps;
+                }
             }
         });
 
@@ -50,6 +68,15 @@ function getProperties(schema) {
             type,
             required,
         };
+    }
+
+    if (Object.prototype.hasOwnProperty.call(schema, 'allOf')) {
+        return schema.allOf.reduce((accumulator, currentItem) => {
+            $ref = currentItem.$ref;
+            let nextSchema = getSchemaObjectByRef($ref);
+            const temp = getProperties(nextSchema);
+            return { ...accumulator, ...temp };
+        }, []);
     }
 
     return schema;
@@ -163,4 +190,27 @@ function getSchemaObjectByRef($ref) {
     return components.schemas[componentName];
 }
 
-export { getSchemaProperties };
+/**
+ * Put properties in an array
+ * @param {object} properties
+ * @return {Array}
+ */
+function propMapping(properties) {
+    const result = Object.keys(properties).map((key) => {
+        const obj = {
+            name: key,
+            type: properties[key].type,
+        };
+        if (
+            Object.prototype.hasOwnProperty.call(properties[key], 'properties')
+        ) {
+            const tmp = propMapping(properties[key].properties);
+            return { ...obj, properties: tmp };
+        }
+        return obj;
+    });
+
+    return result;
+}
+
+export { getSchemaProperties, propMapping };
