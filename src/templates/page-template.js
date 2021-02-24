@@ -12,16 +12,7 @@ import RequestBody from '../components/main/requestBody';
 import '../styles/app.css';
 
 export default ({ pageContext: { page }, data }) => {
-    const {
-        operationId,
-        summary,
-        description,
-        method,
-        url,
-        responses,
-        parameters,
-        requestBody,
-    } = page;
+    const { operationId, summary, description, method, url, responses, parameters, requestBody } = page;
 
     const {
         allMdx: { edges, totalCount },
@@ -39,17 +30,13 @@ export default ({ pageContext: { page }, data }) => {
                 }}>
                 <section style={{ fontFamily: 'system-ui' }}>
                     <OperationId content={operationId} />
-                    {totalCount > 0 && (
-                        <MDXRenderer>{edges[0].node.body}</MDXRenderer>
-                    )}
+                    {totalCount > 0 && <MDXRenderer>{edges[0].node.body}</MDXRenderer>}
                     <Url method={method} url={url} />
                     <Summary content={summary} />
                     <Description content={description} />
-                    {parameters && parameters.length > 0 && (
-                        <Parameters parameters={parameters} />
-                    )}
+                    {parameters && parameters.length > 0 && <Parameters parameters={parameters} />}
                     {requestBody && <RequestBody requestBody={requestBody} />}
-                    <Responses responses={responses} />
+                    <Responses responses={responses} url={url} method={method} />
                 </section>
             </div>
         </div>

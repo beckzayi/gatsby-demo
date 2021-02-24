@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Response from './response';
 
-export default ({ responses }) => {
+export default ({ responses, url, method }) => {
     const arrayStatusCode = Object.keys(responses);
     const [status, setStatus] = useState(arrayStatusCode[0]);
 
@@ -18,16 +18,8 @@ export default ({ responses }) => {
                         {Object.keys(responses).map((key) => (
                             <div key={key} style={{ marginBottom: '0.4rem' }}>
                                 <button
-                                    className={
-                                        key.indexOf('2') === 0
-                                            ? 'text-success'
-                                            : 'text-danger'
-                                    }
-                                    style={
-                                        key !== status
-                                            ? { opacity: '0.4' }
-                                            : { fontWeight: 'bold' }
-                                    }
+                                    className={key.indexOf('2') === 0 ? 'text-success' : 'text-danger'}
+                                    style={key !== status ? { opacity: '0.4' } : { fontWeight: 'bold' }}
                                     onClick={handleClick}>
                                     {key}
                                 </button>
@@ -36,15 +28,13 @@ export default ({ responses }) => {
                     </div>
                     <div style={{ width: '92%' }}>
                         {Object.keys(responses).map((key) => (
-                            <div
-                                key={key}
-                                style={
-                                    key !== status ? { display: 'none' } : {}
-                                }>
+                            <div key={key} style={key !== status ? { display: 'none' } : {}}>
                                 <Response
                                     key={key}
                                     response={responses[key]}
                                     statusCode={key}
+                                    url={url}
+                                    method={method}
                                 />
                             </div>
                         ))}

@@ -1,11 +1,9 @@
 import React, { useState } from 'react';
 import { getComponentObject } from '../../util/helper';
-import getExampleValue, {
-    getSchemaProperties,
-    propMapping,
-} from '../../util/getExampleValue';
+import getExampleValue, { getSchemaProperties, propMapping } from '../../util/getExampleValue';
+import getCodeSnippets from '../../util/getCodeSnippets';
 
-export default ({ response, statusCode }) => {
+export default ({ response, statusCode, url, method }) => {
     const { description, content } = response;
     let obj;
 
@@ -28,17 +26,22 @@ export default ({ response, statusCode }) => {
 
     const schema2 = getSchemaProperties(response);
     let mappedProperties;
-    if (
-        schema2 &&
-        Object.prototype.hasOwnProperty.call(schema2, 'properties')
-    ) {
+    if (schema2 && Object.prototype.hasOwnProperty.call(schema2, 'properties')) {
         const { properties } = schema2;
         mappedProperties = propMapping(properties);
     }
 
     const [displaySchema, setDisplaySchema] = useState(true);
-    const handleClick = (v) => {
+    const handleOnClickSchema = (v) => {
         setDisplaySchema(v);
+    };
+
+    const { snippets } = getCodeSnippets(url, method);
+
+    const [language, setLanguage] = useState('java');
+    const handleOnClickLanguage = (lang) => {
+        setLanguage(lang);
+        console.log('lang', language);
     };
 
     /************** End export fn **************/
@@ -80,7 +83,7 @@ export default ({ response, statusCode }) => {
                             opacity: displaySchema ? '1' : '0.6',
                             cursor: displaySchema ? 'default' : 'pointer',
                         }}
-                        onClick={() => handleClick(true)}>
+                        onClick={() => handleOnClickSchema(true)}>
                         Schema
                     </span>
                     <span
@@ -92,75 +95,56 @@ export default ({ response, statusCode }) => {
                             opacity: !displaySchema ? '1' : '0.6',
                             cursor: !displaySchema ? 'default' : 'pointer',
                         }}
-                        onClick={() => handleClick(false)}>
+                        onClick={() => handleOnClickSchema(false)}>
                         Example
                     </span>
                 </div>
-                {schema2 &&
-                    Object.prototype.hasOwnProperty.call(
-                        schema2,
-                        'properties'
-                    ) && (
-                        <div
-                            style={{
-                                marginTop: '0.5rem',
-                                marginBottom: '1rem',
-                                display: displaySchema ? 'block' : 'none',
-                            }}>
+                {schema2 && Object.prototype.hasOwnProperty.call(schema2, 'properties') && (
+                    <div
+                        style={{
+                            marginTop: '0.5rem',
+                            marginBottom: '1rem',
+                            display: displaySchema ? 'block' : 'none',
+                        }}>
+                        <div>
                             <div>
-                                <div>
-                                    <small>
-                                        Type:{' '}
-                                        <span
-                                            className={`cell--${schema2.type}`}>
-                                            {schema2.type}
-                                        </span>
-                                    </small>
-                                </div>
+                                <small>
+                                    Type: <span className={`cell--${schema2.type}`}>{schema2.type}</span>
+                                </small>
                             </div>
-                            {mappedProperties && (
-                                <ul>
-                                    {mappedProperties.map((item) => {
-                                        return (
-                                            <li key={item.name}>
-                                                <div>
-                                                    <small>
-                                                        {item.name}&nbsp;
-                                                        <span
-                                                            className={`cell--${item.type}`}>{`(${item.type})`}</span>
-                                                    </small>
-                                                    {Object.prototype.hasOwnProperty.call(
-                                                        item,
-                                                        'properties'
-                                                    ) && (
-                                                        <ul>
-                                                            {item.properties.map(
-                                                                (subItem) => (
-                                                                    <li
-                                                                        key={
-                                                                            subItem.name
-                                                                        }>
-                                                                        <small>
-                                                                            {
-                                                                                subItem.name
-                                                                            }
-                                                                            &nbsp;
-                                                                            <span
-                                                                                className={`cell--${subItem.type}`}>{`(${subItem.type})`}</span>
-                                                                        </small>
-                                                                    </li>
-                                                                )
-                                                            )}
-                                                        </ul>
-                                                    )}
-                                                </div>
-                                            </li>
-                                        );
-                                    })}
-                                </ul>
-                            )}
                         </div>
-                    )}
+                        {mappedProperties && (
+                            <ul>
+                                {mappedProperties.map((item) => {
+                                    return (
+                                        <li key={item.name}>
+                                            <div>
+                                                <small>
+                                                    {item.name}&nbsp;
+                                                    <span className={`cell--${item.type}`}>{`(${item.type})`}</span>
+                                                </small>
+                                                {Object.prototype.hasOwnProperty.call(item, 'properties') && (
+                                                    <ul>
+                                                        {item.properties.map((subItem) => (
+                                                            <li key={subItem.name}>
+                                                                <small>
+                                                                    {subItem.name}
+                                                                    &nbsp;
+                                                                    <span
+                                                                        className={`cell--${subItem.type}`}>{`(${subItem.type})`}</span>
+                                                                </small>
+                                                            </li>
+                                                        ))}
+                                                    </ul>
+                                                )}
+                                            </div>
+                                        </li>
+                                    );
+                                })}
+                            </ul>
+                        )}
+                    </div>
+                )}
                 {res && (
                     <div
                         style={{
@@ -172,6 +156,50 @@ export default ({ response, statusCode }) => {
                     </div>
                 )}
             </div>
+
+            {snippets && (
+                <div className="snippets">
+                    <h3>Code Generation</h3>
+                    <ul>
+                        {snippets.map(({ id, title }) => (
+                            <span
+                                key={id}
+                                style={{
+                                    marginRight: '1rem',
+                                    fontSize: '0.875rem',
+                                    color: language === id ? '#f39c12' : '#999',
+                                    fontWeight: language === id ? 'bold' : 'normal',
+                                    opacity: language === id ? '1' : '0.6',
+                                    cursor: language === id ? 'default' : 'pointer',
+                                    borderBottom: language === id ? '1px solid #f39c12' : 'none',
+                                }}
+                                onClick={() => handleOnClickLanguage(id)}>
+                                {getLanguageTitle(title)}
+                            </span>
+                        ))}
+                    </ul>
+                    <ul>
+                        {snippets.map((snippet) => {
+                            const { id, content } = snippet;
+                            return (
+                                <li key={id} style={{ display: language === id ? 'block' : 'none' }}>
+                                    <div style={{ overflow: 'auto auto', minHeight: '200px', height: '200px' }}>
+                                        <pre>{decodeURIComponent(content)}</pre>
+                                    </div>
+                                </li>
+                            );
+                        })}
+                    </ul>
+                </div>
+            )}
         </div>
     );
 };
+
+function getLanguageTitle(title) {
+    if (title.indexOf(' ') > -1) {
+        const arr = title.split(' ');
+        return arr[0];
+    }
+    return title;
+}
