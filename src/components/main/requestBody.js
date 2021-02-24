@@ -1,8 +1,5 @@
 import React, { useState } from 'react';
-import getExampleValue, {
-    getSchemaProperties,
-    propMapping,
-} from '../../util/getExampleValue';
+import getExampleValue, { getSchemaProperties, propMapping } from '../../util/getExampleValue';
 
 export default ({ requestBody }) => {
     const { description } = requestBody;
@@ -65,50 +62,36 @@ export default ({ requestBody }) => {
                     <div>
                         <div>
                             <small>
-                                Type:{' '}
-                                <span className={`cell--${type}`}>{type}</span>
+                                Type: <span className={`cell--${type}`}>{type}</span>
                             </small>
                         </div>
                         <div>
-                            <small>
-                                Required: {requestBody.required.toString()}
-                            </small>
+                            <small>Required: {requestBody.required.toString()}</small>
                         </div>
                     </div>
                     <ul>
                         {mappedProperties.map((item) => {
-                            const isRequired =
-                                required && required.indexOf(item.name) > -1;
+                            const isRequired = required && required.indexOf(item.name) > -1;
                             return (
                                 <li key={item.name}>
                                     <div>
                                         <small>
                                             {item.name}&nbsp;
-                                            <span
-                                                className={`cell--${item.type}`}>{`(${item.type})`}</span>
-                                            {isRequired && (
-                                                <span style={{ color: 'red' }}>
-                                                    &nbsp;*
-                                                </span>
-                                            )}
+                                            <span className={`cell--${item.type}`}>{`(${item.type})`}</span>
+                                            {isRequired && <span style={{ color: 'red' }}>&nbsp;*</span>}
                                         </small>
-                                        {Object.prototype.hasOwnProperty.call(
-                                            item,
-                                            'properties'
-                                        ) && (
+                                        {Object.prototype.hasOwnProperty.call(item, 'properties') && (
                                             <ul>
-                                                {item.properties.map(
-                                                    (subItem) => (
-                                                        <li key={subItem.name}>
-                                                            <small>
-                                                                {subItem.name}
-                                                                &nbsp;
-                                                                <span
-                                                                    className={`cell--${subItem.type}`}>{`(${subItem.type})`}</span>
-                                                            </small>
-                                                        </li>
-                                                    )
-                                                )}
+                                                {item.properties.map((subItem) => (
+                                                    <li key={subItem.name}>
+                                                        <small>
+                                                            {subItem.name}
+                                                            &nbsp;
+                                                            <span
+                                                                className={`cell--${subItem.type}`}>{`(${subItem.type})`}</span>
+                                                        </small>
+                                                    </li>
+                                                ))}
                                             </ul>
                                         )}
                                     </div>

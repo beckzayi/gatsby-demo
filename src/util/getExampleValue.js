@@ -43,18 +43,10 @@ function getProperties(schema) {
                 const newProps = getProperties(schema);
                 properties[key] = newProps;
             } else if (
-                Object.prototype.hasOwnProperty.call(
-                    properties[key],
-                    'items'
-                ) &&
+                Object.prototype.hasOwnProperty.call(properties[key], 'items') &&
                 properties[key].type === 'array'
             ) {
-                if (
-                    Object.prototype.hasOwnProperty.call(
-                        properties[key].items,
-                        '$ref'
-                    )
-                ) {
+                if (Object.prototype.hasOwnProperty.call(properties[key].items, '$ref')) {
                     $ref = properties[key].items.$ref;
                     schema = getSchemaObjectByRef($ref);
                     const newProps = getProperties(schema);
@@ -149,10 +141,7 @@ function getExampleResponseValue(schema) {
             }
 
             // 2c. If "items" exists
-            if (
-                properties[currentKey].type === 'array' &&
-                properties[currentKey].items !== undefined
-            ) {
+            if (properties[currentKey].type === 'array' && properties[currentKey].items !== undefined) {
                 if (properties[currentKey].items.$ref !== undefined) {
                     $ref = properties[currentKey].items.$ref;
                     nextSchema = getSchemaObjectByRef($ref);
@@ -201,9 +190,7 @@ function propMapping(properties) {
             name: key,
             type: properties[key].type,
         };
-        if (
-            Object.prototype.hasOwnProperty.call(properties[key], 'properties')
-        ) {
+        if (Object.prototype.hasOwnProperty.call(properties[key], 'properties')) {
             const tmp = propMapping(properties[key].properties);
             return { ...obj, properties: tmp };
         }

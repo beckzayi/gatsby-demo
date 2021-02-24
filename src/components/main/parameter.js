@@ -17,9 +17,7 @@ export default ({ parameter }) => {
             <td className="cell--description">
                 <ReactMarkdown>{description}</ReactMarkdown>
             </td>
-            <td className={required ? 'cell--required' : 'cell--optional'}>
-                {required ? 'required' : 'optional'}
-            </td>
+            <td className={required ? 'cell--required' : 'cell--optional'}>{required ? 'required' : 'optional'}</td>
             <td className="cell--example">{example}</td>
         </tr>
     );
