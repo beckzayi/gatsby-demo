@@ -1,7 +1,6 @@
 import React from 'react';
 import { graphql } from 'gatsby';
 import { MDXRenderer } from 'gatsby-plugin-mdx';
-import Header from '../components/header';
 import OperationId from '../components/main/operationId';
 import Url from '../components/main/url';
 import Summary from '../components/main/summary';
@@ -19,26 +18,17 @@ export default ({ pageContext: { page }, data }) => {
     } = data;
 
     return (
-        <div style={{ display: 'flex' }}>
-            <div style={{ width: '20%' }}>
-                <Header />
-            </div>
-            <div
-                style={{
-                    width: '80%',
-                    padding: '0 5%',
-                }}>
-                <section style={{ fontFamily: 'system-ui' }}>
-                    <OperationId content={operationId} />
-                    {totalCount > 0 && <MDXRenderer>{edges[0].node.body}</MDXRenderer>}
-                    <Url method={method} url={url} />
-                    <Summary content={summary} />
-                    <Description content={description} />
-                    {parameters && parameters.length > 0 && <Parameters parameters={parameters} />}
-                    {requestBody && <RequestBody requestBody={requestBody} />}
-                    <Responses responses={responses} url={url} method={method} />
-                </section>
-            </div>
+        <div>
+            <section style={{ fontFamily: 'system-ui' }}>
+                <OperationId content={operationId} />
+                {totalCount > 0 && <MDXRenderer>{edges[0].node.body}</MDXRenderer>}
+                <Url method={method} url={url} />
+                <Summary content={summary} />
+                <Description content={description} />
+                {parameters && parameters.length > 0 && <Parameters parameters={parameters} />}
+                {requestBody && <RequestBody requestBody={requestBody} />}
+                <Responses responses={responses} url={url} method={method} />
+            </section>
         </div>
     );
 };

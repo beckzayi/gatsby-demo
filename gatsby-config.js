@@ -20,5 +20,6 @@ module.exports = {
                 extensions: ['.mdx', '.md'],
             },
         },
+        'gatsby-plugin-theme-ui',
     ],
 };

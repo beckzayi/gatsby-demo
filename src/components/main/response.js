@@ -41,7 +41,6 @@ export default ({ response, statusCode, url, method }) => {
     const [language, setLanguage] = useState('java');
     const handleOnClickLanguage = (lang) => {
         setLanguage(lang);
-        console.log('lang', language);
     };
 
     /************** End export fn **************/
