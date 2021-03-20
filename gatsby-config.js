@@ -10,7 +10,7 @@ module.exports = {
         {
             resolve: 'gatsby-source-filesystem',
             options: {
-                name: 'pages',
+                name: 'mds',
                 path: `${__dirname}/src/mds/`,
             },
         },
@@ -22,4 +22,10 @@ module.exports = {
         },
         'gatsby-plugin-theme-ui',
     ],
+    siteMetadata: {
+        title: 'enableHR API',
+        description: 'Hosted API documentation for EnableHR endpoints',
+        url: 'https://www.enablehr.com.au',
+        image: '/images/logo.svg',
+    },
 };

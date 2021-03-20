@@ -1,11 +1,12 @@
 /** @jsx jsx */
 import { jsx, Styled, Flex, Box } from 'theme-ui';
 import Header from './header';
+import SEO from './main/seo';
 
 export default (props) => {
     return (
         <Styled.root>
-            {/* <Head {...props} /> */}
+            <SEO {...props} />
             <Flex>
                 <Box sx={{ px: 3 }}>
                     <Header />
